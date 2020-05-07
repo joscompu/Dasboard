@@ -8,7 +8,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Spring Boot</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -31,31 +32,31 @@
 
         <thead>
 
-            <tr>
+        <tr>
 
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">LasName</th>
-                <th scope="col">Email</th>
-                <th scope="col">Create date</th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Create date</th>
 
-            </tr>
+        </tr>
 
 
         </thead>
 
         <tbody>
 
-            <tr scope="col" th:each="customer: ${customers}">
+        <tr scope="col" th:each="customer: ${customers}">
 
-                <td th:text="${customer.id}"></td>
-                <td th:text="${customer.name}"></td>
-                <td th:text="${customer.lasName}"></td>
-                <td th:text="${customer.email}"></td>
-                <td th:text="${customer.createAt}"></td>
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.createAt}"></td>
 
 
-            </tr>
+        </tr>
 
         </tbody>
 
@@ -63,8 +64,8 @@
     </table>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

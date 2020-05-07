@@ -1,8 +1,12 @@
 package com.spring.boot.models.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,17 +19,19 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String name;
-    private String lasName;
+    @NotEmpty
+    private String lastName;
+    @NotEmpty
+    @Email
     private String email;
 
+    @NotNull
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createAt;
 
-    @PrePersist
-    public void prePersist(){
-        createAt = new Date();
-    }
 
 }

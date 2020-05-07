@@ -5,9 +5,11 @@ import com.spring.boot.models.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -31,7 +33,11 @@ public class CustomerController {
         return "form";
     }
     @RequestMapping(value = "/form",method = RequestMethod.POST)
-    public String saveCustomer(Customer customer){
+    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model){
+        if (result.hasErrors()){
+            model.addAttribute("title","New Customer");
+            return "form";
+        }
         customerDao.save(customer);
         return "redirect:all";
     }
