@@ -18,6 +18,7 @@ public class CustomerDaoImpl implements ICustomerDao {
     @Transactional(readOnly = true)
     @Override
     public List<Customer> findAll() {
-        return em.createQuery("form Customer").getResultList();
+
+        return em.createQuery("from Customer").getResultList();
     }
 }

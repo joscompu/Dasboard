@@ -21,6 +21,6 @@ public class Customer implements Serializable {
 
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
-    private Date crateAt;
+    private Date createAt;
 
 }
