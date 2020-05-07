@@ -21,4 +21,10 @@ public class CustomerDaoImpl implements ICustomerDao {
 
         return em.createQuery("from Customer").getResultList();
     }
+
+    @Transactional
+    @Override
+    public void save(Customer customer) {
+        em.persist(customer);
+    }
 }
