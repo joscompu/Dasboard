@@ -27,7 +27,7 @@
 <div class="container">
     <h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0" th:text="${title}"></h1>
 
-    <p><a th:href="@{/form}" class="btn btn-primary btn-xs">New Customer</a></p>
+    <p><a th:href="@{/form}" class="btn btn-primary btn-xs">New</a></p>
     <table class="table table-striped">
 
         <thead>
@@ -40,6 +40,7 @@
             <th scope="col">Email</th>
             <th scope="col">Create date</th>
             <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
 
         </tr>
 
@@ -55,7 +56,8 @@
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.createAt}"></td>
-            <td><a class="btn btn-info brn-xs" th:href="@{/form/} + ${customer.id}" th:text="'Edit'"></a></td>
+            <td><a class="btn btn-info btn-xs" th:href="@{/form/} + ${customer.id}" th:text="'Edit'"></a></td>
+            <td><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${customer.id}" th:text="'Delete'" onclick="return confirm('Are you sure you want to delete');"></a></td>
 
 
         </tr>

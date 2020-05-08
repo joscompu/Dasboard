@@ -22,6 +22,12 @@ public class CustomerDaoImpl implements ICustomerDao {
         return em.createQuery("from Customer").getResultList();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Customer findOne(Long id) {
+        return em.find(Customer.class, id);
+    }
+
     @Transactional
     @Override
     public void save(Customer customer) {
@@ -32,9 +38,9 @@ public class CustomerDaoImpl implements ICustomerDao {
         }
 
     }
-
+  @Transactional
     @Override
-    public Customer findOne(Long id) {
-        return em.find(Customer.class, id);
+    public void delete(Long id) {
+        em.remove(findOne(id));
     }
 }

@@ -60,4 +60,12 @@ public class CustomerController {
         status.setComplete();
         return "redirect:all";
     }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String deleteCustomer(@PathVariable Long id){
+        if (id>0){
+            customerDao.delete(id);
+        }
+        return "redirect:/all";
+    }
 }
