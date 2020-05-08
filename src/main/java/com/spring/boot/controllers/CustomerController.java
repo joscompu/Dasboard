@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("customer")
 public class CustomerController {
 
     @Autowired
@@ -32,13 +36,28 @@ public class CustomerController {
         model.put("title","New Customer");
         return "form";
     }
+
+    @RequestMapping(value = "/form/{id}")
+    public String editCustomer(@PathVariable Long id, Map<String,Object> model){
+        Customer customer = null;
+        if (id>0){
+            customer = customerDao.findOne(id);
+        }else {
+            return "redirect:/all";
+        }
+        model.put("customer",customer);
+        model.put("title","Edit Customer");
+        return "form";
+    }
+
     @RequestMapping(value = "/form",method = RequestMethod.POST)
-    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model){
+    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model, SessionStatus status){
         if (result.hasErrors()){
             model.addAttribute("title","New Customer");
             return "form";
         }
         customerDao.save(customer);
+        status.setComplete();
         return "redirect:all";
     }
 }

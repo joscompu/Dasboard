@@ -25,6 +25,16 @@ public class CustomerDaoImpl implements ICustomerDao {
     @Transactional
     @Override
     public void save(Customer customer) {
-        em.persist(customer);
+        if (customer.getId() != null && customer.getId() > 0) {
+            em.merge(customer);
+        } else {
+            em.persist(customer);
+        }
+
+    }
+
+    @Override
+    public Customer findOne(Long id) {
+        return em.find(Customer.class, id);
     }
 }
