@@ -2,6 +2,7 @@ package com.spring.boot.controllers;
 
 import com.spring.boot.models.dao.ICustomerDao;
 import com.spring.boot.models.entity.Customer;
+import com.spring.boot.models.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,12 @@ import java.util.Map;
 public class CustomerController {
 
     @Autowired
-    private ICustomerDao customerDao;
+    private ICustomerService iCustomerService;
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public String allCustomer(Model model){
         model.addAttribute("title","All Customer");
-        model.addAttribute("customers",customerDao.findAll());
+        model.addAttribute("customers",iCustomerService.findAll());
         return "all";
     }
 
@@ -41,7 +42,7 @@ public class CustomerController {
     public String editCustomer(@PathVariable Long id, Map<String,Object> model){
         Customer customer = null;
         if (id>0){
-            customer = customerDao.findOne(id);
+            customer = iCustomerService.findOne(id);
         }else {
             return "redirect:/all";
         }
@@ -56,7 +57,7 @@ public class CustomerController {
             model.addAttribute("title","New Customer");
             return "form";
         }
-        customerDao.save(customer);
+        iCustomerService.save(customer);
         status.setComplete();
         return "redirect:all";
     }
@@ -64,7 +65,7 @@ public class CustomerController {
     @RequestMapping(value = "/delete/{id}")
     public String deleteCustomer(@PathVariable Long id){
         if (id>0){
-            customerDao.delete(id);
+            iCustomerService.delete(id);
         }
         return "redirect:/all";
     }
