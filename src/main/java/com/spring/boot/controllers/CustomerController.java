@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -39,11 +40,16 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/form/{id}")
-    public String editCustomer(@PathVariable Long id, Map<String,Object> model){
+    public String editCustomer(@PathVariable Long id, Map<String,Object> model, RedirectAttributes flash){
         Customer customer = null;
         if (id>0){
             customer = iCustomerService.findOne(id);
+            if (customer == null){
+                flash.addFlashAttribute("error","The customer does not exist in the database");
+                return "redirect:/all";
+            }
         }else {
+            flash.addFlashAttribute("error","The customer cannot have id 0");
             return "redirect:/all";
         }
         model.put("customer",customer);
@@ -52,20 +58,23 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/form",method = RequestMethod.POST)
-    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model, SessionStatus status){
+    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status){
         if (result.hasErrors()){
             model.addAttribute("title","New Customer");
             return "form";
         }
+        String mensaggeFlash = (customer.getId() != null)? "Customer successfully edited" : "Customer created successfully";
         iCustomerService.save(customer);
         status.setComplete();
+        flash.addFlashAttribute("success",mensaggeFlash);
         return "redirect:all";
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deleteCustomer(@PathVariable Long id){
+    public String deleteCustomer(@PathVariable Long id , RedirectAttributes flash){
         if (id>0){
             iCustomerService.delete(id);
+            flash.addFlashAttribute("success","Customer successfully removed");
         }
         return "redirect:/all";
     }

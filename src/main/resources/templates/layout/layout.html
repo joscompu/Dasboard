@@ -23,6 +23,13 @@
                     </ul>
                 </div>
             </nav>
+
+
+
+            <div class="alert alert-success bg-success text-white" id="success-alert"  th:if="${success != null}" th:text="${success}"></div>
+            <div class="alert alert-danger bg-danger text-white"   th:if="${error != null}"   th:text="${error}"></div>
+            <div class="alert alert-warning bg-warning text-white"  th:if="${warning != null}" th:text="${warning}"></div>
+            <div class="alert alert-info bg-info text-white"     th:if="${info != null}"    th:text="${info}"></div>
         </header>
 
 
@@ -50,5 +57,10 @@
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         </footer>
+
+        <script>
+
+
+        </script>
     </body>
 </html>
