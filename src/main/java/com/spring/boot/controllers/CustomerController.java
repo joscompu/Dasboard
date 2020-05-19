@@ -1,6 +1,6 @@
 package com.spring.boot.controllers;
 
-import com.spring.boot.models.dao.ICustomerDao;
+
 import com.spring.boot.models.entity.Customer;
 import com.spring.boot.models.service.ICustomerService;
 import com.spring.boot.util.paginator.PageRender;
@@ -13,9 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Controller
@@ -24,6 +29,19 @@ public class CustomerController {
 
     @Autowired
     private ICustomerService iCustomerService;
+
+    @GetMapping(value = "/view/{id}")
+    public String view(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash){
+        Customer customer = iCustomerService.findOne(id);
+        if (customer == null){
+            flash.addFlashAttribute("error","Customer does not exist in the database");
+            return "redirect:/all";
+        }
+
+        model.put("customer",customer);
+        model.put("title","Details Customer: " + customer.getName());
+        return "view";
+    }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public String allCustomer(@RequestParam(name = "page",defaultValue = "0") int page, Model model){
@@ -63,11 +81,28 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/form",method = RequestMethod.POST)
-    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status){
+    public String saveCustomer(@Valid Customer customer, BindingResult result, Model model,
+                               @RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status){
         if (result.hasErrors()){
             model.addAttribute("title","New Customer");
             return "form";
         }
+
+        if (!photo.isEmpty()){
+
+            Path directoryResources = Paths.get("src//main//resources//static//uploads");
+            String rootPath = directoryResources.toFile().getAbsolutePath();
+            try {
+                byte[] bytes = photo.getBytes();
+                Path pathComplete = Paths.get(rootPath + "//" + photo.getOriginalFilename());
+                Files.write(pathComplete,bytes);
+                flash.addFlashAttribute("info","Image has been loaded '" + photo.getOriginalFilename() + "'");
+                customer.setPhoto(photo.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         String mensaggeFlash = (customer.getId() != null)? "Customer successfully edited" : "Customer created successfully";
         iCustomerService.save(customer);
         status.setComplete();

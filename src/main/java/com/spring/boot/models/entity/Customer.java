@@ -33,5 +33,7 @@ public class Customer implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createAt;
 
+    private String photo;
+
 
 }

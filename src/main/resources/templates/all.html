@@ -37,7 +37,7 @@
 
                 <tr scope="col" th:each="customer: ${customers}">
 
-                    <td th:text="${customer.id}"></td>
+                    <td><a class="btn btn-info btn-xs" th:href="@{/view/} + ${customer.id}" th:text="${customer.id}"></a></td>
                     <td th:text="${customer.name}"></td>
                     <td th:text="${customer.lastName}"></td>
                     <td th:text="${customer.email}"></td>
@@ -60,5 +60,6 @@
     </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>
+<script th:src="@{/js/alert.js}"></script>
 </body>
 </html>
