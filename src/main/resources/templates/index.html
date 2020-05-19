@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"></head>
+
+
+
 <body class="bg-dark">
+
 <header th:replace="layout/layout :: header"></header>
 
-<div class="container py-4">
+<div class="container py-1">
 
     <h1 th:text="${title}" class="text-white py-4"></h1>
 
 </div>
-<footer th:replace="layout/layout :: footer"></footer>
+<div class="fixed-bottom">
+    <footer  th:replace="layout/layout :: footer"></footer>
+
+</div>
+
 
 </body>
 </html>

@@ -6,29 +6,29 @@
 
 <div class="container py-4">
 
+    <h4 class="card-title">
     <a th:href="@{/all}" class="btn btn-secondary btn-xs" data-placement="right" title="Back">Back</a>
+    </h4>
+   <div class="card mb-3 bg-dark border-secondary text-white">
 
-    <div class="card bg-dark border-secondary text-white">
-        <div class="card-header border-secondary bg-dark"  th:text="${title}"></div>
-        <div class="card-body">
-
-        <img th:if="${#strings.length(customer.photo) > 0}" class="img-thumbnail rounded float-left"
-             style="max-width: 25%;" th:src="@{'/uploads/' + ${customer.photo}}"
-             th:alt="${customer.photo}">
-
-
-         <ul class="list-group ">
-
-             <li class="list-group-item bg-info border-secondary" th:text="${customer.name}"></li>
-             <li class="list-group-item bg-dark border-secondary" th:text="${customer.lastName}"></li>
-             <li class="list-group-item bg-dark border-secondary" th:text="${customer.email}"></li>
-             <li class="list-group-item bg-dark border-secondary" th:text="${customer.createAt}"></li>
-
-         </ul>
-
-
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img th:if="${#strings.length(customer.photo) > 0}"  class="card-img border-secondary" th:src="@{'/uploads/' + ${customer.photo}}"
+                     th:alt="${customer.photo}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title border-secondary bg-dark "  th:text="${title}"></h5>
+                    <p class="card-text bg-dark border-secondary" th:text="${customer.name}"><small class="text-muted"></small></p>
+                    <p class="card-text bg-dark border-secondary" th:text="${customer.lastName}"><small class="text-muted"></small></p>
+                    <p class="card-text bg-dark border-secondary" th:text="${customer.email}"><small class="text-muted"></small></p>
+                    <p class="card-text bg-dark border-secondary" th:text="${customer.createAt}"><small class="text-muted"></small></p>
+                </div>
+            </div>
         </div>
     </div>
+
+
 </div>
 <footer th:replace="layout/layout :: footer"></footer>
 

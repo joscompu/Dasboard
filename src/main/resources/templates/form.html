@@ -6,10 +6,11 @@
 <header th:replace="layout/layout :: header"></header>
 
 <div class="container py-4">
-    <a th:href="@{/all}" class="btn btn-secondary btn-xs" data-placement="right" title="Back">Back</a>
+
     <div class="card bg-dark border-secondary text-white">
         <div class="card-header border-secondary  bg-dark" th:text="${title}"></div>
         <div class="card-body">
+            <a th:href="@{/all}" class="btn btn-secondary btn-xs" data-placement="right" title="Back">Back</a>
 
     <div th:object="${customer}" th:remove="tag">
 
@@ -60,7 +61,7 @@
             <label class=" col-sm-2 col-form-label">Date</label>
 
             <div class="col-sm-6">
-                <input type="text" th:field="*{createAt}" class="form-control"
+                <input type="date" th:field="*{createAt}" class="form-control"
                        th:errorclass="'form-control alert-danger'">
                 <small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}"
                        th:errors="*{createAt}"></small>
