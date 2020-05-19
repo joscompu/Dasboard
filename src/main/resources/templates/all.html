@@ -6,13 +6,13 @@
 
 <div class="container py-4">
 
-    <div class="card bg-dark border-success">
-        <div class="card-header bg-secondary border-primary border-top-0 border-left-0 border-right-0 text-white" th:text="${title}"></div>
+    <div class="card bg-dark border-secondary">
+        <div class="card-header bg-dark border-secondary  text-white" th:text="${title}"></div>
         <div class="card-body">
 
 
             <h4 class="card-title">
-                <a th:href="@{/form}" class="btn btn-success btn-xs" data-placement="right" title="New">New</a>
+                <a th:href="@{/form}" class="btn btn-info btn-xs" data-placement="right" title="New">New</a>
             </h4>
             <table class="table table-striped text-white">
 
@@ -37,14 +37,14 @@
 
                 <tr scope="col" th:each="customer: ${customers}">
 
-                    <td><a class="btn btn-info btn-xs" th:href="@{/view/} + ${customer.id}" th:text="${customer.id}"></a></td>
+                    <td><a class="btn btn-secondary btn-xs" data-placement="right" title="Details" th:href="@{/view/} + ${customer.id}" th:text="${customer.id}"></a></td>
                     <td th:text="${customer.name}"></td>
                     <td th:text="${customer.lastName}"></td>
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.createAt}"></td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${customer.id}" th:text="'Edit'"
+                    <td><a class="btn btn-info btn-xs" th:href="@{/form/} + ${customer.id}" th:text="'Edit'"
                            data-placement="right" title="Edit"></a></td>
-                    <td><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${customer.id}" th:text="'Delete'"
+                    <td><a class="btn btn-secondary  btn-xs" th:href="@{/delete/} + ${customer.id}" th:text="'Delete'"
                            onclick="return confirm('Are you sure you want to delete');" data-placement="right"
                            title="Delete"></a></td>
 
@@ -60,6 +60,6 @@
     </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>
-<script th:src="@{/js/alert.js}"></script>
+
 </body>
 </html>

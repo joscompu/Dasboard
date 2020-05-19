@@ -6,8 +6,9 @@
 <header th:replace="layout/layout :: header"></header>
 
 <div class="container py-4">
-    <div class="card bg-dark border-success text-white">
-        <div class="card-header border-primary border-top-0 border-left-0 border-right-0 bg-secondary" th:text="${title}"></div>
+    <a th:href="@{/all}" class="btn btn-secondary btn-xs" data-placement="right" title="Back">Back</a>
+    <div class="card bg-dark border-secondary text-white">
+        <div class="card-header border-secondary  bg-dark" th:text="${title}"></div>
         <div class="card-body">
 
     <div th:object="${customer}" th:remove="tag">
@@ -79,7 +80,7 @@
 
         <div class="form-group">
             <div class="col-sm-6">
-                <input type="submit" value="Add" class="btn btn-success" data-placement="right" title="Add">
+                <input type="submit" value="Add" class="btn btn-info" data-placement="right" title="Add">
             </div>
         </div>
 
@@ -90,6 +91,6 @@
         </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>
-<script th:src="@{/js/alert.js}"></script>
+
 </body>
 </html>

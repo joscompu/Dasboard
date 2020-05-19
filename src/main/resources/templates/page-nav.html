@@ -18,9 +18,9 @@
         </li>
 
         <li class="page-item" th:each="item : ${page.pages}"
-            th:class="${item.current? 'page-item active bg-success':'page-item'}">
+            th:class="${item.current? 'page-item active':'page-item'}">
 
-            <span class="page-link" th:if="${item.current}" th:text="${item.number}"></span>
+            <span class="page-link bg-secondary" th:if="${item.current}" th:text="${item.number}"></span>
             <a class="page-link" th:if="${not item.current}" th:href="@{${page.url}(page=${item.number-1})}"
                th:text="${item.number}"></a>
 

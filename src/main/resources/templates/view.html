@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"></head>
-<body>
+<body class="bg-dark">
 <header th:replace="layout/layout :: header"></header>
 
 <div class="container py-4">
 
-    <div class="card bg-light">
-        <div class="card-header"  th:text="${title}"></div>
+    <a th:href="@{/all}" class="btn btn-secondary btn-xs" data-placement="right" title="Back">Back</a>
+
+    <div class="card bg-dark border-secondary text-white">
+        <div class="card-header border-secondary bg-dark"  th:text="${title}"></div>
         <div class="card-body">
 
         <img th:if="${#strings.length(customer.photo) > 0}" class="img-thumbnail rounded float-left"
@@ -15,12 +17,12 @@
              th:alt="${customer.photo}">
 
 
-         <ul class="list-group">
+         <ul class="list-group ">
 
-             <li class="list-group-item" th:text="${customer.name}"></li>
-             <li class="list-group-item" th:text="${customer.lastName}"></li>
-             <li class="list-group-item" th:text="${customer.email}"></li>
-             <li class="list-group-item" th:text="${customer.createAt}"></li>
+             <li class="list-group-item bg-info border-secondary" th:text="${customer.name}"></li>
+             <li class="list-group-item bg-dark border-secondary" th:text="${customer.lastName}"></li>
+             <li class="list-group-item bg-dark border-secondary" th:text="${customer.email}"></li>
+             <li class="list-group-item bg-dark border-secondary" th:text="${customer.createAt}"></li>
 
          </ul>
 
