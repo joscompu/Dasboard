@@ -8,7 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,6 +36,17 @@ public class Customer implements Serializable {
     private Date createAt;
 
     private String photo;
+
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Invoice> invoices;
+
+    public Customer(){
+        invoices = new ArrayList<Invoice>();
+    }
+
+    public void addInvoice(Invoice invoice){
+        invoices.add(invoice);
+    }
 
 
 }
