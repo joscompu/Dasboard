@@ -34,11 +34,11 @@ public class Invoice implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id")
-    private List<ItemInvoice> items;
+    private List<InvoiceItem> items;
 
 
     public Invoice(){
-        this.items = new ArrayList<ItemInvoice>();
+        this.items = new ArrayList<InvoiceItem>();
     }
 
 
@@ -47,7 +47,7 @@ public class Invoice implements Serializable {
         createAt = new Date();
     }
 
-    public void addItemInvoice(ItemInvoice item){
+    public void addItemInvoice(InvoiceItem item){
         this.items.add(item);
     }
 

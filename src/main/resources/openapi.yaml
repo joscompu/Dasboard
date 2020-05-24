@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: joscompu@gmail.com
+  description: Model `Api Sales Point`
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'http://osm-soft.com'
+  title: Sales Point
+  version: 1.0.0
+servers:
+- url: https://osm-soft.com/v2
+- url: http://osm-soft.com/v2
+tags:
+  - name: Customers
+  - name: Items
+  - name: Invoices
+paths:
+  /customers:
+    get:
+      operationId: getCustomers
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: ''
+                type: array
+          description: OK
+        404:
+          $ref: ''
+      summary: Get all customers registered
+      tags:
+        - Customers

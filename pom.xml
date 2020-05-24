@@ -16,6 +16,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<openapi-tools.version>4.0.2</openapi-tools.version>
+		<base.package>sales-point</base.package>
 	</properties>
 
 	<dependencies>
@@ -71,6 +73,36 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-tools.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
+					<generatorName>spring</generatorName>
+					<modelPackage>${base.package}.api.models</modelPackage>
+					<apiPackage>${base.package}.api</apiPackage>
+					<library>spring-boot</library>
+					<!--<ignoreFileOverride>${project.basedir}/.openapi-generator-ignore</ignoreFileOverride>-->
+					<configOptions>
+						<sourceFolder>src/java/main</sourceFolder>
+						<dateLibrary>java11</dateLibrary>
+						<useBeanValidation>true</useBeanValidation>
+						<performBeanValidation>true</performBeanValidation>
+						<reactive>true</reactive>
+						<delegatePattern>true</delegatePattern>
+						<configPackage>${base.package}.api</configPackage>
+						<basePackage>${base.package}</basePackage>
+					</configOptions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
