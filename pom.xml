@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<openapi-tools.version>4.0.2</openapi-tools.version>
+		<openapi-tools.version>5.1.0</openapi-tools.version>
 		<base.package>sales-point</base.package>
 	</properties>
 
